@@ -1,0 +1,8 @@
+services:
+  gerador-database:
+    container_name: gerador-database
+    image: postgres:18.1-alpine3.22
+    ports:
+      - "5432:5432"
+    env_file:
+      - ../../.env
