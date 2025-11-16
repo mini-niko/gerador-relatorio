@@ -9,10 +9,12 @@
     "lint": "eslint",
     "services:up": "docker compose -f src/infra/compose.yaml up -d",
     "services:down": "docker compose -f src/infra/compose.yaml down",
-    "db:push": "prisma db push"
+    "db:seed": "prisma db push && prisma db seed",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@prisma/client": "^6.19.0",
+    "@prisma/extension-accelerate": "^2.0.2",
     "cli-progress": "^3.12.0",
     "dotenv": "^17.2.3",
     "dotenv-expand": "^12.0.3",
@@ -24,13 +26,16 @@
     "@faker-js/faker": "^10.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/cli-progress": "^3.11.6",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "jest": "^30.2.0",
     "prisma": "^6.19.0",
     "tailwindcss": "^4",
+    "ts-jest": "^29.4.5",
     "tsx": "^4.20.6",
     "typescript": "^5"
   }

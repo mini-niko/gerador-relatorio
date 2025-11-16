@@ -1,8 +1,12 @@
-import { PrismaClient } from "../src/prisma/generated/client";
+import { PrismaClient } from "@/prisma/generated/client";
 import { randomNumber } from "@/lib/utils";
 import { faker } from "@faker-js/faker";
 import { Decimal } from "@prisma/client/runtime/client";
 import cliProgress from "cli-progress";
+
+export const USERS_QUANTITY = parseInt(
+  process.env.PRISMA_USER_QUANTITY || "30000"
+);
 
 type Transactions = {
   type: "CREDIT" | "DEBIT";
@@ -15,13 +19,11 @@ const prisma = new PrismaClient();
 async function populateDatabase() {
   console.log();
 
-  const usersQuantity = randomNumber(2000, 3000);
-
   const progressBar = getProgressBar();
   progressBar.stop();
-  progressBar.start(usersQuantity, 0);
+  progressBar.start(USERS_QUANTITY, 0);
 
-  for (let i = 0; i < usersQuantity; i++) {
+  for (let i = 0; i < USERS_QUANTITY; i++) {
     const transactions = getTransactions();
     await insertUserWithTransactions(transactions);
 
@@ -44,7 +46,7 @@ function getProgressBar() {
 
 function getTransactions() {
   const transactions = [];
-  const transactionsQuantity = randomNumber(20, 100);
+  const transactionsQuantity = randomNumber(50, 200);
 
   for (let j = 0; j < transactionsQuantity; j++) {
     transactions.push({
